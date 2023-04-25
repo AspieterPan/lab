@@ -1,17 +1,15 @@
-lab: lab.c
-	gcc $< -o $@.out -lpthread
+run: lab.out
+	./$< "hello" "world!"
 
-lab2: lab2.c
-	gcc $< -o $@.out
+lab.out: lab.c
+	gcc $< -o $@ -lpthread
 
-r: lab
-	./$<.out
-
-r2: lab2
-	./$<.out
 
 py: lab.py
 	python3 ./$<
+	
+thread:
+	cd ./thread && make run
 
 clean:
 	rm -f ./*.out

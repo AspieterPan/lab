@@ -1,13 +1,11 @@
-#!/usr/bin/env python3
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-
-def foo(a, *, b, c):
-    print(a)
-    print(b)
-    print(c)
+def fib(n):
+    if n == 1:
+        return 1
+    elif n == 2:
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)
 
 
-foo(1)
+a = fib(4)
+print(a)
