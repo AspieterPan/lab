@@ -1,11 +1,16 @@
-def fib(n):
-    if n == 1:
-        return 1
-    elif n == 2:
-        return 1
-    else:
-        return fib(n-1) + fib(n-2)
+li = [1, 2, 3, 4, 5]
 
 
-a = fib(4)
-print(a)
+class fool():
+    def __init__(self, li):
+        self.li = li
+        self.lhs = li[2]
+
+    def mod(self, x):
+        self.lhs += 10
+
+
+f = fool(li)
+f.mod(2)
+
+print(li)
