@@ -1,8 +1,8 @@
 run: lab.out
-	./$< "hello" "world!"
+	./$< 
 
-lab.out: lab.c
-	gcc $< -o $@ -lpthread
+lab.out: lab.cpp 
+	clang++ -g -std=c++20 -Wall $< -o $@
 
 
 py: lab.py

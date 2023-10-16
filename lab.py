@@ -1,16 +1,18 @@
-li = [1, 2, 3, 4, 5]
+import asyncio
 
 
-class fool():
-    def __init__(self, li):
-        self.li = li
-        self.lhs = li[2]
-
-    def mod(self, x):
-        self.lhs += 10
+async def func(name):
+    for i in range(100):
+        print(f"first doing someting at {i} of {name}")
+        await asyncio.sleep(1)
+        print(f"second doing someting at {i} of {name}")
 
 
-f = fool(li)
-f.mod(2)
+async def main():
+    tasks = []
+    for i in range(100):
+        tasks.append(func(i))
+    await asyncio.gather(*tasks)
 
-print(li)
+
+asyncio.run(main())

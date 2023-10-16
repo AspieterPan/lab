@@ -8,12 +8,11 @@ pthread_mutex_t mutex;
 
 void *sell_ticket(void *arg) {
   int i;
-  for ( i = 0; i < 10; i++) {
+  for (i = 0; i < 10; i++) {
     pthread_mutex_lock(&mutex);
     if (ticket_sum > 0) {
       sleep(1);
-      printf("%u sell the %dth ticket\n", pthread_self(),
-             10 - ticket_sum + 1);
+      printf("%u sell the %dth ticket\n", pthread_self(), 10 - ticket_sum + 1);
       ticket_sum--;
     }
     pthread_mutex_unlock(&mutex);
