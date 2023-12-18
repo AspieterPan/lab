@@ -1,62 +1,27 @@
-from typing import Self
-from queue import Queue
+import matplotlib.pyplot as plt
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 
+# 定义参数范围
+theta = np.linspace(0, 2 * np.pi, 100)
+phi = np.linspace(0, np.pi, 100)
 
-class Node:
-    def __init__(self, val=-1, left: Self = None, right: Self = None):
-        self.val = val
-        self.left = left
-        self.right = right
+# 参数化曲线
+x_curve = np.sqrt(2) * np.outer(np.cos(theta), np.sin(phi))
+y_curve = np.sqrt(2) * np.outer(np.sin(theta), np.sin(phi))
+z_curve = 2 + np.outer(np.ones(100), np.cos(phi))
 
-    def show(self):
-        if self.left:
-            self.left.show()
-        print(self.val)
-        if self.right:
-            self.right.show()
+# 绘制曲线
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.plot_surface(
+    x_curve, y_curve, z_curve, color="b", alpha=0.5, rstride=100, cstride=100
+)
 
+# 设置坐标轴标签
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.set_zlabel("Z")
 
-class Tree:
-    def __init__(self, head: Self = None):
-        self.head = head
-
-    def show(self):
-        self.head.show()
-
-    def get_WPL(self):
-        WPL = 0
-        q = Queue()
-        q.put(self.head)
-        level = -1
-        while not q.empty():
-            level += 1
-            for i in range(q.qsize()):
-                item = q.get()
-                if not (item.left or item.right):
-                    WPL += item.val * level
-                else:
-                    if item.left:
-                        q.put(item.left)
-                    if item.right:
-                        q.put(item.right)
-        return WPL
-
-
-def create_test_tree() -> Tree:
-    n1 = Node(1)
-    n2 = Node(2)
-    n3 = Node(3)
-    n4 = Node(4)
-    n1.left = n2
-    n1.right = n3
-    n3.right = n4
-    tree = Tree(n1)
-    return tree
-
-
-if __name__ == "__main__":
-    tree = create_test_tree()
-    tree.show()
-    print()
-    wpl = tree.get_WPL()
-    print(wpl)
+# 显示图形
+plt.show()
