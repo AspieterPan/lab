@@ -1,29 +1,53 @@
 #include <iostream>
-#include <queue>
-#include <string>
+#include <math.h>
 
-int main() {
-    int cnt[10] = {0};
-    int c;
-    bool pass = true;
-    for (int n = 22; n < 1000000; n++) {
-        c = n;
-        pass = true;
-        // clear the cnt array
-        for (int i = 0; i < 10; i++) {
-            cnt[i] = 0;
-        }
-        for (int i = 0; c > 0; i++) {
-            cnt[c % 10]++;
-            c /= 10;
-        }
-        for (int i = 0; i < 10; i++) {
-            if (cnt[i] && cnt[i] != i) {
-                pass = false;
-            }
-        }
-        if (pass) {
-            std::cout << n << std::endl;
+using namespace std;
+
+int factor_sum(int n) {
+    int sum = 0;
+    int i = 2;
+    for (; i < sqrt(n); i++) {
+        if (n % i == 0) {
+            sum += i;
+            sum += n / i;
         }
     }
+    if (i * i == n) {
+        sum += i;
+    }
+    return sum + 1;
+}
+
+void test_factor_sum() {
+    cout << factor_sum(4) << endl;
+    cout << factor_sum(6) << endl;
+    cout << factor_sum(8) << endl;
+    cout << factor_sum(220) << endl;
+    cout << factor_sum(284) << endl;
+}
+
+void affine_num(int x, int y) {
+    int another;
+    for (int i = x; i < y; i++) {
+        another = factor_sum(i);
+        if (another >= x && another <= y && another != i &&
+            factor_sum(another) == i) {
+            cout << i << " " << another << endl;
+            return;
+        }
+    }
+    cout << "NO" << endl;
+}
+
+int main() {
+    int n;
+    int x;
+    int y;
+    cin >> n;
+    while (n) {
+        cin >> x >> y;
+        affine_num(x, y);
+        n--;
+    }
+    return 1;
 }
