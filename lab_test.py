@@ -1,7 +1,11 @@
-from pypinyin import pinyin, Style
+import fileinput
 
-text = "汉字转拼音"
-pinyin_list = pinyin(text, style=Style.TONE2)
 
-for word in pinyin_list:
-    print("".join(word))
+def alias2fish():
+    for line in fileinput.input():
+        pos = line.find("=")
+        print(f"alias {line[:pos]} {line[pos+1:]}")
+
+
+if __name__ == "__main__":
+    alias2fish()
