@@ -1,11 +1,6 @@
-import fileinput
+def recursion(n: int):
+    print(n)
+    recursion(n + 1)
 
 
-def alias2fish():
-    for line in fileinput.input():
-        pos = line.find("=")
-        print(f"alias {line[:pos]} {line[pos+1:]}")
-
-
-if __name__ == "__main__":
-    alias2fish()
+recursion(1)

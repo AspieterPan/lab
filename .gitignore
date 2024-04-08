@@ -4,3 +4,8 @@
 .vscode/**
 __pycache__/**
 build/**
+
+lab_rs/target/**
+lab_rs/.vscode/** */
+
+main
